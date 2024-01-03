@@ -4,6 +4,7 @@ import User from "./User";
 import File from "./File";
 import sequelize from "sequelize";
 import UserFile from "./UserFile";
+import db from "../dbConfig";
 
 env.config();
 
@@ -35,18 +36,28 @@ function fkConfig() {
     as: "Users",
     foreignKey: "FileId"
   });
-
-// // In the User model
-// User.belongsToMany(File, { through: UserFile });
-
-// // In the File model
-// File.belongsToMany(User, { through: UserFile });
-
 }
+
+// async function addUserForTest() {
+//   try {
+//       const query = `
+//           INSERT INTO user (UserId, UserName, UserEmail, UserPassword)
+//           VALUES (1, 'Ionut', 'campeanuionut21@stud.ase.ro', 'parolaSecure');
+//       `;
+
+//       // Execute the raw SQL query
+//       await db.query(query);
+
+//       console.log('Test user added for testing.');
+//   } catch (error) {
+//       console.error('Error adding test user:', error);
+//   }
+// }
 
 function db_init() {
   createDatabase();
   fkConfig();
+  // addUserForTest();
 }
 
 export default db_init;

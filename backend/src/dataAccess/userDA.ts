@@ -10,34 +10,25 @@ async function getUsers(){
     return await User.findAndCountAll();
 }
 
-// async function getEmployees(employeeFilter: employeeFilterDto) {
-
-//   if (!employeeFilter.take)
-//     employeeFilter.take = 10;
-
-//   if (!employeeFilter.skip)
-//     employeeFilter.skip = 0;
-
-//   let whereClause: any = {};
-//   if (employeeFilter.employeeName)
-//     whereClause.EmployeeName = { [Like]: `%${employeeFilter.employeeName}%` };
-
-//   if (employeeFilter.employeeSurName)
-//     whereClause.EmployeeSurName = { [Like]: `%${employeeFilter.employeeSurName}%` };
-
-//   return await Employee.findAndCountAll(
-//     {
-//       distinct: true,
-//       where: whereClause,
-//       limit: employeeFilter.take,
-//       offset: employeeFilter.skip * employeeFilter.take,
-//     });
-
-// }
-
 async function getUserById(id: number) {
   return await User.findByPk(id);
 }
+
+async function getUserByEmail(email: string) {
+  try {
+    const user = await User.findOne({
+      where: {
+        UserEmail: email
+      }
+    });
+    console.log(`user = ${user}`);
+    return user;
+  } catch (error) {
+    console.error('Error getting user by email:', error);
+    throw error;
+  }
+}
+
 
 async function deleteUser(id: number) {
   let deleteElem = await User.findByPk(id);
@@ -74,5 +65,6 @@ export {
   getUsers,
   getUserById,
   deleteUser,
-  updateUser
+  updateUser,
+  getUserByEmail
 }

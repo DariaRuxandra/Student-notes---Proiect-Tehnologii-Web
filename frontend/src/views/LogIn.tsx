@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { get, getForLogin, post } from "../api/Calls";
 
 export default function LogIn() {
   const navigate = useNavigate();
@@ -28,12 +29,32 @@ export default function LogIn() {
     setIsValid(isValidEmail);
   };
 
-  const handleLogin = () => {
+  // const handleLogin = () => {
+  //   if (email && password && isValid) {
+  //     navigate("/Edit");
+  //   } else {
+  //     // alert('Please fill in both email and password fields.');
+  //     setShowAlert(true);
+  //   }
+  // };
+
+  const handleLogin = async () => {
     if (email && password && isValid) {
-      navigate("/Edit");
+      try {
+        const response = await getForLogin("/user", email);
+        console.log(`response din LogIn = ${response}`);
+        if (response) {
+          navigate("/Edit");
+        } else {
+          setShowAlert(true);
+          console.log("sau aici");
+        }
+      } catch (error) {
+        console.error("Error during login:", error);
+      }
     } else {
-      // alert('Please fill in both email and password fields.');
       setShowAlert(true);
+      console.log(" aici");
     }
   };
 
@@ -76,7 +97,7 @@ export default function LogIn() {
       </Container>
       {showAlert && (
         <Alert variant="filled" severity="error" onClose={handleCloseAlert}>
-          Please fill in both email and password fields.
+          The credentials do not exist.
         </Alert>
       )}
     </div>
