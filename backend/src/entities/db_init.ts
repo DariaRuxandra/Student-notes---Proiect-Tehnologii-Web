@@ -38,26 +38,10 @@ function fkConfig() {
   });
 }
 
-// async function addUserForTest() {
-//   try {
-//       const query = `
-//           INSERT INTO user (UserId, UserName, UserEmail, UserPassword)
-//           VALUES (1, 'Ionut', 'campeanuionut21@stud.ase.ro', 'parolaSecure');
-//       `;
-
-//       // Execute the raw SQL query
-//       await db.query(query);
-
-//       console.log('Test user added for testing.');
-//   } catch (error) {
-//       console.error('Error adding test user:', error);
-//   }
-// }
 
 function db_init() {
   createDatabase();
   fkConfig();
-  // addUserForTest();
 }
 
 export default db_init;
