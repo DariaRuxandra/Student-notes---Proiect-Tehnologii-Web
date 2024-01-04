@@ -29,6 +29,21 @@ async function getUserByEmail(email: string) {
   }
 }
 
+async function getUserForLogin(email: string, password: string) {
+  try {
+    const user = await User.findOne({
+      where: {
+        UserEmail: email,
+        UserPassword: password
+      }
+    });
+    console.log(`user = ${user}`);
+    return user;
+  } catch (error) {
+    console.error('Error getting user by email:', error);
+    throw error;
+  }
+}
 
 async function deleteUser(id: number) {
   let deleteElem = await User.findByPk(id);
@@ -66,5 +81,6 @@ export {
   getUserById,
   deleteUser,
   updateUser,
-  getUserByEmail
+  getUserByEmail,
+  getUserForLogin
 }

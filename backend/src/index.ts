@@ -4,6 +4,7 @@ import cors from "cors";
 import masterRouter from "./routes/masterRouter";
 import db_init from "./entities/db_init";
 import userRouter from "./routes/userRouter";
+import editingRouter from "./routes/editingRouter";
 
 env.config();
 
@@ -22,6 +23,7 @@ db_init();
 
 app.use("/api", masterRouter);
 app.use("/api", userRouter);
+app.use("/api", editingRouter);
 
 
 const port = process.env.PORT || 8001;

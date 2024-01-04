@@ -29,32 +29,21 @@ export default function LogIn() {
     setIsValid(isValidEmail);
   };
 
-  // const handleLogin = () => {
-  //   if (email && password && isValid) {
-  //     navigate("/Edit");
-  //   } else {
-  //     // alert('Please fill in both email and password fields.');
-  //     setShowAlert(true);
-  //   }
-  // };
 
   const handleLogin = async () => {
     if (email && password && isValid) {
       try {
-        const response = await getForLogin("/user", email);
-        console.log(`response din LogIn = ${response}`);
+        const response = await getForLogin("/user", email, password);
         if (response) {
           navigate("/Edit");
         } else {
           setShowAlert(true);
-          console.log("sau aici");
         }
       } catch (error) {
         console.error("Error during login:", error);
       }
     } else {
       setShowAlert(true);
-      console.log(" aici");
     }
   };
 
