@@ -54,7 +54,6 @@ export default function LogIn() {
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
       <h1>Log In</h1>
-      {/* <form> */}
       <Container component="main" maxWidth="xs">
         <TextField
           label="Email"
@@ -82,7 +81,6 @@ export default function LogIn() {
           Log In
         </Button>
 
-        {/* </form> */}
       </Container>
       {showAlert && (
         <Alert variant="filled" severity="error" onClose={handleCloseAlert}>

@@ -1,0 +1,24 @@
+.container{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    display: flex !important;
+    justify-content: space-between !important;
+    /* align-items: center; */
+    /* border: 1px solid green; */
+}
+
+.editContainer{
+    margin-left: 50px;
+    margin-right: 50px;
+    /* border: 1px solid blue; */
+}
+
+.courseAndTitleContainer{
+    display: flex !important;
+    gap: 10px;
+    /* border:1px solid red; */
+}
+
+.saveButton{
+    background-color:#ec729c !important;
+}

@@ -1,6 +1,8 @@
+import { Button, Container, TextField } from "@mui/material";
 import React, { useState, ChangeEvent } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import "../css/EditComponent.css";
 
 interface EditProps {}
 
@@ -45,28 +47,69 @@ const Edit: React.FC<EditProps> = () => {
 
   const [code, setCode] = useState<string>("");
   const [course, setCourse] = useState<string>("");
+  const [title, setTitle] = useState<string>("");
 
-  const handleProcedureContentChange = (content: string) => {
-    setCode(content);
+
+  const handleProcedureContentChange = (course: string) => {
+    setCode(course);
+  };
+
+  const handleTitleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setTitle(input);
   };
 
   const handleCourseChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setCourse(event.target.value);
+    const input = event.target.value;
+      setCourse(input);
   };
+
+  const saveDocument = () => {
+    const courseInput = course;
+    const titleInput = title;
+    if (courseInput.length !== 0 && titleInput.length !== 0) {
+      setCourse(courseInput);
+      setTitle(titleInput);
+      console.log(courseInput, titleInput);
+    } else {
+      console.log('Field is empty');
+    }
+  }
+
+  //Butonul de SAVE functioneaza doar daca este completat field-ul de Course, am nevoie sa filtrez notitele dupa ce se scrie in field-ul acesta. Mi s-a parut cea mai usoara varianta de a verifica faptul ca utilizatorul imi completeaza acel field.
+  const isSaveButtonDisabled = course.trim() === '' || title.trim() === '';
 
   return (
     <>
-      <div>
-        <label htmlFor="course">Course:</label>
-        <input
-          type="text"
-          id="course"
-          value={course}
-          onChange={handleCourseChange}
-        />
-      </div>
-      <div>
-        {/* {console.log(code)} */}
+      <Container className="container">
+        <Container className="courseAndTitleContainer">
+          <TextField
+            id="outlined-controlled"
+            label="Course"
+            value={course}
+            onChange={handleCourseChange}
+          />
+
+          <TextField
+            id="outlined-controlled"
+            label="Title"
+            value={title}
+            onChange={handleTitleChange}
+          />
+        </Container>
+ 
+        <Button 
+        variant="contained" 
+        color="primary" 
+        onClick={saveDocument} 
+        disabled={isSaveButtonDisabled}
+        className="saveButton"
+        >
+          Save
+        </Button>
+
+      </Container>
+      <Container >
         <ReactQuill
           theme="snow"
           modules={modules}
@@ -74,7 +117,7 @@ const Edit: React.FC<EditProps> = () => {
           value={code}
           onChange={handleProcedureContentChange}
         />
-      </div>
+      </Container>
     </>
   );
 };
