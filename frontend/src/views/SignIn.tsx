@@ -5,9 +5,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { get, getForLogin, post } from "../api/Calls";
 
-export default function LogIn() {
+
+export default function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [isValid, setIsValid] = useState(true);
   const [showAlert, setShowAlert] = useState(false);
@@ -22,6 +24,10 @@ export default function LogIn() {
     setPassword(event.target.value);
   };
 
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+  };
+
   const validateEmail = (value: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const isValidEmail =
@@ -30,15 +36,19 @@ export default function LogIn() {
   };
 
 
-  const handleLogIn = async () => {
+  const handleSignIn = async () => {
     if (email && password && isValid) {
       try {
-        const response = await getForLogin("/user", email, password);
-        if (response) {
-          navigate("/Edit");
-        } else {
-          setShowAlert(true);
-        }
+        const DBObject = {
+            UserName: `${name}`, 
+            UserEmail: `${email}`, 
+            UserPassword: `${password}`
+        };
+        const response = await post("/user", DBObject);
+        if(response){
+            navigate("/Edit");
+            console.log("User adaugat in baza de date");
+        }else console.log("User-ul nu a fost adaugat in baza de date");
       } catch (error) {
         console.error("Error during login:", error);
       }
@@ -53,8 +63,18 @@ export default function LogIn() {
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Log In</h1>
+      <h1>Sign In</h1>
       <Container component="main" maxWidth="xs">
+      <TextField
+          label="Name"
+          variant="outlined"
+          margin="normal"
+          fullWidth
+          value={name}
+          onChange={handleNameChange}
+          placeholder="Enter your name"
+          error={!isValid}
+        />
         <TextField
           label="Email"
           variant="outlined"
@@ -77,18 +97,16 @@ export default function LogIn() {
           value={password}
           onChange={handlePasswordChange}
         />
-        <Button variant="contained" color="primary" onClick={handleLogIn}>
-          Log In
+        <Button variant="contained" color="primary" onClick={handleSignIn}>
+          Sign In
         </Button>
 
-        <p>But first, make sure to <a href="/SignIn">Sign in</a></p>
-
       </Container>
-      {showAlert && (
+      {/* {showAlert && (
         <Alert variant="filled" severity="error" onClose={handleCloseAlert}>
           The credentials do not exist.
         </Alert>
-      )}
+      )} */}
     </div>
   );
 }

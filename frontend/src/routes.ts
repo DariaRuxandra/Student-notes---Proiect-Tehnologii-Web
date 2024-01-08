@@ -2,6 +2,7 @@ import Edit from "./views/Edit";
 import LogIn from "./views/LogIn";
 import MyWork from "./views/MyWork";
 import NotFound from "./views/NotFound";
+import SignIn from "./views/SignIn";
 
 export const routes = Object.freeze([
   { 
@@ -9,6 +10,11 @@ export const routes = Object.freeze([
     component: LogIn,
     name: null,
     // private: false, // Indicate whether the route is private (requires login)
+  },
+  {
+    path: '/SignIn', 
+    component: SignIn,
+    name: null
   },
   { 
     path: '/Edit', 
