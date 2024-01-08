@@ -3,6 +3,7 @@ import React, { useState, ChangeEvent } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../css/EditComponent.css";
+import { post } from "../api/Calls";
 
 interface EditProps {}
 
@@ -64,13 +65,21 @@ const Edit: React.FC<EditProps> = () => {
       setCourse(input);
   };
 
+  const sendStringToDatabase = async () => {
+    const obj = {"FileCourse":`${course}`, "FileTitle":`${title}`, "FileContent":`${code}`}
+    const response = await post("/edit", obj);
+    if(response) console.log('success');
+    else console.log('error');
+  }
+
   const saveDocument = () => {
     const courseInput = course;
     const titleInput = title;
     if (courseInput.length !== 0 && titleInput.length !== 0) {
       setCourse(courseInput);
       setTitle(titleInput);
-      console.log(courseInput, titleInput);
+      sendStringToDatabase();
+      console.log(code);
     } else {
       console.log('Field is empty');
     }

@@ -3,7 +3,7 @@ import env from "dotenv";
 import User from "./User";
 import File from "./File";
 import sequelize from "sequelize";
-import UserFile from "./UserFile";
+// import UserFile from "./UserFile";
 import db from "../dbConfig";
 
 env.config();

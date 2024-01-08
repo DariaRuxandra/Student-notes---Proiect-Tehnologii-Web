@@ -27,6 +27,7 @@ export default function LogIn() {
     const isValidEmail =
       emailRegex.test(value) && value.endsWith("@stud.ase.ro");
     setIsValid(isValidEmail);
+    // const a = markdownify("i want to sleep");
   };
 
 
@@ -92,3 +93,4 @@ export default function LogIn() {
     </div>
   );
 }
+

@@ -4,7 +4,8 @@ import { ModelDefined } from 'sequelize';
 
 export interface FileAttributes {
     FileId : number,
-    UserId: number,
+    FileCourse: string,
+    FileTitle: string,
     FileContent: string | null
 }
 
@@ -18,6 +19,16 @@ const File : ModelDefined<FileAttributes, FileCreationAttributes> = db.define("F
         type: Sequelize.INTEGER,
         primaryKey: true,
         autoIncrement: true,
+        allowNull: false
+    },
+    FileCourse:
+    {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    FileTitle:
+    {
+        type: Sequelize.STRING,
         allowNull: false
     },
     FileContent:

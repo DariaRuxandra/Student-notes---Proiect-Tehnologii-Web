@@ -1,13 +1,30 @@
 import express from 'express';
-import multer from 'multer';
-import path from 'path';
-import { upload } from '../dataAccess/EditDA';
+import { createFile, deleteFile,  getFileById,  getFiles, updateFile } from '../dataAccess/EditDA';
 
-const editingRouter = express.Router();
+let editRouter = express.Router();
 
-editingRouter.post('/upload', upload.single('image'), (req, res) => {
-  const imageUrl = '/uploads/' + (req.file as Express.Multer.File).filename;
-  res.json({ imageUrl });
+editRouter.route('/edit').post(async (req, res) => {
+    return res.json(await createFile(req.body));
 });
 
-export default editingRouter;
+editRouter.route('/edit/:id').get( async (req, res) => {
+    let id = parseInt(req.params.id) 
+    return res.json(await getFileById(id));
+});
+
+
+editRouter.route('/user').get( async (req, res) => {
+    return res.json(await getFiles());
+});
+
+editRouter.route('/edit/:id').delete( async (req, res) => {
+    let id = parseInt(req.params.id) 
+    return res.json(await deleteFile(id));
+});
+
+editRouter.route('/edit/:id').put( async (req, res) => {
+    let id = parseInt(req.params.id) 
+    return res.json(await updateFile(req.body, id));
+  })
+
+export default editRouter;

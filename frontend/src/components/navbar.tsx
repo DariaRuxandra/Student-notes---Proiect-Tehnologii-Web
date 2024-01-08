@@ -35,11 +35,15 @@ function ResponsiveAppBar() {
     navigate(path);
   }
 
+  function handleIconClick(){
+    navigate("/");
+  }
+
   return (
     <AppBar position="static" sx={{ backgroundColor: '#ec729c' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} onClick={handleIconClick} />
           <Typography
             variant="h6"
             noWrap
@@ -54,6 +58,7 @@ function ResponsiveAppBar() {
               color: 'inherit',
               textDecoration: 'none',
             }}
+            onClick={handleIconClick}
           >
             NOTES
           </Typography>

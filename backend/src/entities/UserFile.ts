@@ -13,7 +13,7 @@ export interface UserFileAttributes {
 
 export interface UserFileCreationAttributes extends UserFileAttributes {}
 
-const UserFile : ModelDefined<UserFileAttributes, UserFileCreationAttributes> = db.define("UserFile", 
+const UserFile : ModelDefined<UserFileAttributes, UserFileCreationAttributes> = db.define("Userfile", 
 {
     UserId: 
     {
