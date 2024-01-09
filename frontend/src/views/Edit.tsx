@@ -65,11 +65,37 @@ const Edit: React.FC<EditProps> = () => {
       setCourse(input);
   };
 
-  const sendStringToDatabase = async () => {
-    const obj = {"FileCourse":`${course}`, "FileTitle":`${title}`, "FileContent":`${code}`}
-    const response = await post("/edit", obj);
-    if(response) console.log('success');
-    else console.log('error');
+  let id : number;
+  const sendFileToDatabase = async () => {
+    try{
+      const obj = {"FileCourse":`${course}`, "FileTitle":`${title}`, "FileContent":`${code}`};
+      const response = await post("/edit", obj);
+      if (response) {
+        id = response.FileId;
+        return id;
+      }
+      if(response) console.log('sendFile ->  success');
+      else console.log('send file ->  error');
+    }catch (error) {
+      console.error('Error in sendFileToDatabase:', error);
+    }
+    
+  }
+
+  const populateUserFileTable = async () => {
+    try{
+      const userId = localStorage.getItem("id");
+      const fileId = await sendFileToDatabase();
+      if(fileId){
+        const obj = {"UserId": userId, "FileId": fileId};
+        const response = await post("/userFile", obj);
+        if(response) console.log('send userfile -> success');
+        else console.log('send userfile -> error');
+      }
+      
+    }catch (error) {
+      console.error('Error in populateUserFileTable:', error);
+    }
   }
 
   const saveDocument = () => {
@@ -78,8 +104,8 @@ const Edit: React.FC<EditProps> = () => {
     if (courseInput.length !== 0 && titleInput.length !== 0) {
       setCourse(courseInput);
       setTitle(titleInput);
-      sendStringToDatabase();
-      console.log(code);
+      sendFileToDatabase();
+      populateUserFileTable();
     } else {
       console.log('Field is empty');
     }

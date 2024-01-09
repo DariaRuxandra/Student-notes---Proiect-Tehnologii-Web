@@ -24,7 +24,7 @@ async function get(url: string, queryParams: any = null, id: any = null) {
 }
 
 //verifica doar daca exista mail-ul
-// async function getForLoginn(url: string, email: string) {
+// async function getIdByEmail(url: string, email: string) {
 //     try {
 //       const fullUrl = `${url}/${email}`;
       

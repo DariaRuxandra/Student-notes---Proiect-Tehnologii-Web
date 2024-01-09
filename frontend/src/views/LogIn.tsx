@@ -36,6 +36,7 @@ export default function LogIn() {
       try {
         const response = await getForLogin("/user", email, password);
         if (response) {
+          localStorage.setItem("id", response.UserId);
           navigate("/Edit");
         } else {
           setShowAlert(true);

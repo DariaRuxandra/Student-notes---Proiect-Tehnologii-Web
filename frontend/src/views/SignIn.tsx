@@ -46,8 +46,9 @@ export default function SignIn() {
         };
         const response = await post("/user", DBObject);
         if(response){
-            navigate("/Edit");
-            console.log("User adaugat in baza de date");
+          localStorage.setItem("id", response.UserId);
+          navigate("/Edit");
+          console.log("User adaugat in baza de date");
         }else console.log("User-ul nu a fost adaugat in baza de date");
       } catch (error) {
         console.error("Error during login:", error);
