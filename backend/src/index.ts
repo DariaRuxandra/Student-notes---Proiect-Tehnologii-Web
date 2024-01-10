@@ -6,6 +6,7 @@ import db_init from "./entities/db_init";
 import userRouter from "./routes/userRouter";
 import editingRouter from "./routes/editingRouter";
 import userFileRouter from "./routes/userFileRouter";
+import viewFileRouter from "./routes/viewFileRouter";
 
 env.config();
 
@@ -26,7 +27,7 @@ app.use("/api", masterRouter);
 app.use("/api", userRouter);
 app.use("/api", editingRouter);
 app.use("/api", userFileRouter);
-
+// app.use("/api", viewFileRouter);
 
 const port = process.env.PORT || 8001;
 app.listen(port);

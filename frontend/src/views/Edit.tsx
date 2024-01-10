@@ -4,6 +4,7 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import "../css/EditComponent.css";
 import { post } from "../api/Calls";
+import { Navigate, useNavigate } from "react-router-dom";
 
 interface EditProps {}
 
@@ -49,7 +50,7 @@ const Edit: React.FC<EditProps> = () => {
   const [code, setCode] = useState<string>("");
   const [course, setCourse] = useState<string>("");
   const [title, setTitle] = useState<string>("");
-
+  const [savedNotes, setSavedNotes] = useState<JSX.Element[]>([]);
 
   const handleProcedureContentChange = (course: string) => {
     setCode(course);
@@ -98,14 +99,17 @@ const Edit: React.FC<EditProps> = () => {
     }
   }
 
+  const navigate = useNavigate();
+
   const saveDocument = () => {
     const courseInput = course;
     const titleInput = title;
     if (courseInput.length !== 0 && titleInput.length !== 0) {
       setCourse(courseInput);
       setTitle(titleInput);
-      sendFileToDatabase();
       populateUserFileTable();
+      
+      navigate('/MyWork');
     } else {
       console.log('Field is empty');
     }
@@ -132,6 +136,7 @@ const Edit: React.FC<EditProps> = () => {
             onChange={handleTitleChange}
           />
         </Container>
+
  
         <Button 
         variant="contained" 

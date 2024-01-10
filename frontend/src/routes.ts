@@ -3,6 +3,7 @@ import LogIn from "./views/LogIn";
 import MyWork from "./views/MyWork";
 import NotFound from "./views/NotFound";
 import SignIn from "./views/SignIn";
+import ViewFile from "./views/ViewFile";
 
 export const routes = Object.freeze([
   { 
@@ -27,6 +28,11 @@ export const routes = Object.freeze([
     component: MyWork,
     name: "My Work",
     // private: true,
+  },
+  { 
+    path: '/ViewFile', 
+    component: ViewFile,
+    name: null
   },
   { 
     path: '*', 
