@@ -17,7 +17,6 @@ export default function MyWork() {
       try {
         const response = await get("/edit");
         setFiles(response.rows); 
-        console.log(response);
       } catch (error) {
         console.error('Error fetching files:', error);
       }
@@ -25,7 +24,7 @@ export default function MyWork() {
 
     fetchFiles();
   }, []);
-  console.log(files[1]);
+  
   return (
     <div>
       <h1>My Work</h1>
