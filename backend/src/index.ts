@@ -27,7 +27,7 @@ app.use("/api", masterRouter);
 app.use("/api", userRouter);
 app.use("/api", editingRouter);
 app.use("/api", userFileRouter);
-// app.use("/api", viewFileRouter);
+app.use("/api", viewFileRouter);
 
 const port = process.env.PORT || 8001;
 app.listen(port);

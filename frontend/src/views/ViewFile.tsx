@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { get } from '../api/Calls';
 import DOMPurify from 'dompurify';
+import { useParams } from 'react-router-dom';
 
 interface FileContent {
     FileId: number;
@@ -9,15 +10,21 @@ interface FileContent {
     FileContent: string;
 }
 
+interface RouteParams {
+    id: string;
+    [key: string]: string | undefined;
+  }
+
 export default function ViewFile() {
     const [fileContent, setFileContent] = useState<FileContent | null>(null);
+    const { id } = useParams<RouteParams>();
 
-    let id = 5;
 
     const fetchData = async () => {
         try {
             const response: FileContent = await get(`/edit/${id}`);
             setFileContent(response);
+            
         } catch (error) {
             console.error("Error fetching file:", error);
         }

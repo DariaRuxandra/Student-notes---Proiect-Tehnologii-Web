@@ -16,7 +16,7 @@ export default function MyWork() {
     const fetchFiles = async () => {
       try {
         const response = await get("/edit");
-        setFiles(response.rows); // Assuming response is an array of files
+        setFiles(response.rows); 
         console.log(response);
       } catch (error) {
         console.error('Error fetching files:', error);

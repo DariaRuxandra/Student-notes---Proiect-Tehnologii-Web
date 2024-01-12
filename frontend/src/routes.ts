@@ -35,6 +35,11 @@ export const routes = Object.freeze([
     name: null
   },
   { 
+    path: '/ViewFile/:id', 
+    component: ViewFile,
+    name: null
+  },
+  { 
     path: '*', 
     component: NotFound,
     name: null,

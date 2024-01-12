@@ -28,7 +28,7 @@ const File: ModelDefined<FileAttributes, FileCreationAttributes> = db.define(
             allowNull: false,
         },
         FileContent: {
-            type: Sequelize.TEXT, // Change to Sequelize.TEXT for longer texts
+            type: Sequelize.TEXT, 
             allowNull: true,
         },
     }
