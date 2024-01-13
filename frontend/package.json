@@ -15,6 +15,7 @@
     "@types/multer": "^1.4.11",
     "@types/node": "^16.18.69",
     "@types/react": "^18.2.46",
+    "@types/sequelize": "^4.28.20",
     "axios": "^1.6.3",
     "dompurify": "^3.0.8",
     "html-react-parser": "^5.0.11",

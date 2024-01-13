@@ -1,5 +1,5 @@
 import db from '../dbConfig';
-import Sequelize, { DataTypes, ModelDefined } from 'sequelize';
+import Sequelize, { ModelDefined } from 'sequelize';
 
 export interface FileAttributes {
     FileId: number;
@@ -28,7 +28,7 @@ const File: ModelDefined<FileAttributes, FileCreationAttributes> = db.define(
             allowNull: false,
         },
         FileContent: {
-            type: Sequelize.TEXT, 
+            type: Sequelize.TEXT('long'), 
             allowNull: true,
         },
     }

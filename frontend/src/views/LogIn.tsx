@@ -83,7 +83,7 @@ export default function LogIn() {
           Log In
         </Button>
 
-        <p>But first, make sure to <a href="/SignIn">Sign in</a></p>
+        <p>If you don't have an account, make sure to <a href="/SignIn">Sign in</a></p>
 
       </Container>
       {showAlert && (

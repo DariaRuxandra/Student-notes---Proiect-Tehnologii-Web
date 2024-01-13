@@ -5,6 +5,7 @@ import { get, remove } from '../api/Calls';
 import ViewFile from '../views/ViewFile';
 import DOMPurify from 'dompurify';
 import Button from '@mui/material/Button';
+import "../css/NoteComponentStyle.css";
 
 
 interface NoteComponentProps {
@@ -32,24 +33,51 @@ function NoteComponent({ file }: NoteComponentProps) {
     else console.log('nu s-a sters file-ul');
   };
 
+  const handleUpdateEvent = () => {
+    const updateData = {
+      "FileId": file.FileId,
+      "FileCourse": file.FileCourse,
+      "FileTitle": file.FileTitle,
+      "FileContent": file.FileContent
+    };
+    navigate('/Update', { state: { updateData } });
+  }
+
   return (
     <>
       {isBoxVisible && (
-        <Box 
+        <Box
+        className = "container" 
           component="section" 
-          sx={{ p: 2, border: '1px dashed grey' }}
-          onClick={handleClickEvent}
+          sx={{ p: 2, border: '1px solid grey' }}
         >
           <p>{file.FileTitle}</p>
           <p>{file.FileCourse}</p>
 
-          <Button onClick={handleDeleteEvent}>
+        <div className="buttonContainer">
+          <Button 
+          variant="contained" color="primary"
+          onClick={handleDeleteEvent}>
             Delete
           </Button>
+          <Button variant="contained" color="primary"
+          onClick={handleUpdateEvent}
+          >
+            Update
+          </Button>
+          <Button 
+          variant="contained" color="primary"
+          onClick={handleClickEvent}
+          >
+            View
+          </Button>
+        </div>
         </Box>
       )}
     </>
   );
 }
+
+
 
 export default NoteComponent;

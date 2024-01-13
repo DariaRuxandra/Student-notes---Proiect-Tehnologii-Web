@@ -3,6 +3,7 @@ import LogIn from "./views/LogIn";
 import MyWork from "./views/MyWork";
 import NotFound from "./views/NotFound";
 import SignIn from "./views/SignIn";
+import Update from "./views/Update";
 import ViewFile from "./views/ViewFile";
 
 export const routes = Object.freeze([
@@ -21,6 +22,12 @@ export const routes = Object.freeze([
     path: '/Edit', 
     component: Edit,
     name: "Edit",
+    // private: true,
+  },
+  { 
+    path: '/Update', 
+    component: Update,
+    name: null,
     // private: true,
   },
   { 
