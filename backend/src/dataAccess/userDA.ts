@@ -71,7 +71,6 @@ async function getUserCoursesById(userId: any) {
 }
 
 
-
 async function getUserForLogin(email: string, password: string) {
   try {
     const user = await User.findOne({

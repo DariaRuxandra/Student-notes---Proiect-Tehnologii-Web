@@ -23,18 +23,24 @@ async function get(url: string, queryParams: any = null, id: any = null) {
     return (await api.get(newUrl, { params: queryParams })).data;
 }
 
-async function getCoursesForUser(userId: number): Promise<string[]> {
-    const url = `/user/${userId}/courses`;
-  
+// Example getCoursesForUser function
+async function getCoursesForUser(userId: number) {
     try {
-      const response: AxiosResponse<{ courses: string[] }> = await get(url);
-  
-      return response.data.courses;
+      const url = `/user/${userId}/courses`;
+      return(await api.get(url)).data; 
+    //   if (response && response.courses) {
+    //     return response.courses;
     } catch (error) {
-      console.error('Error fetching courses:');
+      console.error('Error fetching courses:', error);
       throw error;
     }
   }
+
+
+  
+  
+  
+  
   
 
 //verifica doar daca exista mail-ul
