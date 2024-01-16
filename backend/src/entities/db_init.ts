@@ -24,19 +24,34 @@ function createDatabase() {
     });
 }
 
+// function fkConfig() {
+//     //many-to-many
+//   User.belongsToMany(File, {
+//     through: "UserFile",
+//     as: "Files",
+//     foreignKey: "UserId"
+//   });
+//   File.belongsToMany(User, {
+//     through: "UserFile",
+//     as: "Users",
+//     foreignKey: "FileId"
+//   });
+// }
+
 function fkConfig() {
-    //many-to-many
+  // many-to-many
   User.belongsToMany(File, {
     through: "UserFile",
-    as: "Files",
+    as: "UserFiles", // Change the alias to 'UserFiles' or any other unique name
     foreignKey: "UserId"
   });
   File.belongsToMany(User, {
     through: "UserFile",
-    as: "Users",
+    as: "Users", // Change the alias to 'Users' or any other unique name
     foreignKey: "FileId"
   });
 }
+
 
 
 function db_init() {

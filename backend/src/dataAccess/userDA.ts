@@ -1,6 +1,9 @@
 import User, { UserCreationAttributes } from "../entities/User";
 import { Like } from "./operators";
 import db from "../dbConfig";
+import File, {FileCreationAttributes} from "../entities/File";
+import UserFile, {UserFileCreationAttributes} from "../entities/UserFile";
+
 
 async function createUser(user: UserCreationAttributes) {
   return await User.create(user);
@@ -28,6 +31,46 @@ async function getUserByEmail(email: string) {
     throw error;
   }
 }
+
+//m-a distrus, dar merge
+async function getUserCoursesById(userId: any) {
+  try {
+    const user = await User.findByPk(userId, {
+      include: {
+        model: File,
+        as: 'Files',
+        attributes: ['FileCourse'],
+        through: { attributes: [] },
+      },
+    });
+
+    if (!user) {
+      console.log(`User not found for ID: ${userId}`);
+      return { error: 'User not found' };
+    }
+
+    const userFiles = (user as any).getDataValue('Files'); 
+
+    if (!Array.isArray(userFiles)) {
+      console.log(`User ${userId} has no associated courses`);
+      return { error: 'User has no associated courses' };
+    }
+
+    const courses = userFiles.map((file: any) => file.FileCourse);
+
+    if (!courses.length) {
+      console.log(`User ${userId} has no associated courses`);
+      return { error: 'User has no associated courses' };
+    }
+
+    return { courses };
+  } catch (error) {
+    console.error('Error fetching user courses:', error);
+    return { error: 'Internal Server Error' };
+  }
+}
+
+
 
 async function getUserForLogin(email: string, password: string) {
   try {
@@ -82,5 +125,6 @@ export {
   deleteUser,
   updateUser,
   getUserByEmail,
-  getUserForLogin
+  getUserForLogin,
+  getUserCoursesById
 }

@@ -23,7 +23,7 @@ const UserFile : ModelDefined<UserFileAttributes, UserFileCreationAttributes> = 
         allowNull: false,
         references: {
             model: User, 
-            key: 'id'
+            key: 'UserId'
           }
     },
     FileId:
@@ -34,7 +34,7 @@ const UserFile : ModelDefined<UserFileAttributes, UserFileCreationAttributes> = 
         allowNull: false,
         references: {
             model: File,
-            key: 'id'
+            key: 'FileId'
           }
     }
 });

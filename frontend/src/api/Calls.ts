@@ -1,4 +1,4 @@
-import axios, { AxiosError } from 'axios';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 const api = axios.create({
     baseURL: 'http://localhost:9000/api',
@@ -22,6 +22,20 @@ async function get(url: string, queryParams: any = null, id: any = null) {
     let newUrl = !id ? url : url + "/" + id;
     return (await api.get(newUrl, { params: queryParams })).data;
 }
+
+async function getCoursesForUser(userId: number): Promise<string[]> {
+    const url = `/user/${userId}/courses`;
+  
+    try {
+      const response: AxiosResponse<{ courses: string[] }> = await get(url);
+  
+      return response.data.courses;
+    } catch (error) {
+      console.error('Error fetching courses:');
+      throw error;
+    }
+  }
+  
 
 //verifica doar daca exista mail-ul
 // async function getIdByEmail(url: string, email: string) {
@@ -80,5 +94,5 @@ async function remove(url: string, id: any) {
     )).data;
 }
 
-export { get, post, put, remove, getForLogin } 
+export { get, post, put, remove, getForLogin, getCoursesForUser } 
 
