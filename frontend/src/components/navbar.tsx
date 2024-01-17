@@ -13,6 +13,7 @@ import Tooltip from '@mui/material/Tooltip';
 import MenuItem from '@mui/material/MenuItem';
 import AdbIcon from '@mui/icons-material/Adb';
 import { useNavigate, useLocation } from 'react-router-dom';
+import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { routes } from '../routes';
 
 const pages = routes.filter((r) => r.name);
@@ -43,7 +44,7 @@ function ResponsiveAppBar() {
     <AppBar position="static" sx={{ backgroundColor: '#ec729c' }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} onClick={handleIconClick} />
+          <AutoStoriesIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} onClick={handleIconClick} />
           <Typography
             variant="h6"
             noWrap

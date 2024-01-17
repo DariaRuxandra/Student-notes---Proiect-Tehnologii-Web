@@ -1,4 +1,9 @@
-.form{
-    margin: 40px 60px;
+.my-work-container {
+  padding-top: 40px;
+}
 
+.form {
+  /* margin: 40px 60px; */
+  max-width: 400px;
+  padding-top: 140px;
 }

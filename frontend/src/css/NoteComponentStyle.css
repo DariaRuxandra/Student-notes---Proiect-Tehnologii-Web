@@ -1,10 +1,34 @@
-.container{
-    margin: 40px 60px;
-    display: flex !important;
-    justify-content: space-between !important;
+.container {
+  margin: 40px 60px;
+  display: flex !important;
+  justify-content: space-between !important;
+  border-radius: 10px;
+  align-items: center !important;
 }
 
-.buttonContainer{
-    display: flex;
-    gap: 10px;
+.buttonContainer {
+  display: flex;
+  gap: 10px;
+  align-items: center !important;
+}
+
+.note-text-container {
+  display: flex !important;
+  align-items: center;
+  gap: 30px;
+}
+
+.note-text-container .note-text-container {
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.note-text-container .title-and-label p {
+  margin: unset !important;
+  text-align: center !important;
+}
+
+.note-text-container .title-and-label .title {
+  font-weight: bold;
+  font-size: 20px;
 }

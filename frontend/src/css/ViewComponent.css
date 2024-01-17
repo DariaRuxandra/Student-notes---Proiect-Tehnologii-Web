@@ -1,0 +1,44 @@
+.view-container {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1440px;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 20px;
+}
+
+.content-container {
+  /* padding: 20px; */
+}
+
+.title-and-label {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: flex-start; */
+  align-items: flex-start;
+}
+
+.title-and-label .label {
+  background: black;
+  color: white;
+  border-radius: 30px;
+  width: auto;
+  padding: 5px 10px;
+}
+
+.view-container h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  /* width: 100%; */
+  border-bottom: 1px solid black;
+}
+
+p {
+  text-align: left;
+}

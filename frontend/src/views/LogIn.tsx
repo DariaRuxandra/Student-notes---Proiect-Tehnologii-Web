@@ -30,7 +30,6 @@ export default function LogIn() {
     // const a = markdownify("i want to sleep");
   };
 
-
   const handleLogIn = async () => {
     if (email && password && isValid) {
       try {
@@ -54,7 +53,7 @@ export default function LogIn() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
+    <div className="login-component">
       <h1>Log In</h1>
       <Container component="main" maxWidth="xs">
         <TextField
@@ -79,12 +78,19 @@ export default function LogIn() {
           value={password}
           onChange={handlePasswordChange}
         />
-        <Button variant="contained" color="primary" onClick={handleLogIn}>
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "#ec729c", marginTop: "25px" }}
+          onClick={handleLogIn}
+        >
           Log In
         </Button>
 
-        <p>If you don't have an account, make sure to <a href="/SignIn">Sign in</a></p>
-
+        <p>
+          If you don't have an account, make sure to{" "}
+          <a href="/SignIn">Sign up</a>
+        </p>
       </Container>
       {showAlert && (
         <Alert variant="filled" severity="error" onClose={handleCloseAlert}>
@@ -94,4 +100,3 @@ export default function LogIn() {
     </div>
   );
 }
-

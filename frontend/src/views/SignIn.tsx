@@ -5,7 +5,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { get, getForLogin, post } from "../api/Calls";
 
-
 export default function SignIn() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -35,21 +34,20 @@ export default function SignIn() {
     setIsValid(isValidEmail);
   };
 
-
   const handleSignIn = async () => {
     if (email && password && isValid) {
       try {
         const DBObject = {
-            UserName: `${name}`, 
-            UserEmail: `${email}`, 
-            UserPassword: `${password}`
+          UserName: `${name}`,
+          UserEmail: `${email}`,
+          UserPassword: `${password}`,
         };
         const response = await post("/user", DBObject);
-        if(response){
+        if (response) {
           localStorage.setItem("id", response.UserId);
           navigate("/Edit");
           console.log("User adaugat in baza de date");
-        }else console.log("User-ul nu a fost adaugat in baza de date");
+        } else console.log("User-ul nu a fost adaugat in baza de date");
       } catch (error) {
         console.error("Error during login:", error);
       }
@@ -63,10 +61,10 @@ export default function SignIn() {
   };
 
   return (
-    <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Sign In</h1>
+    <div className="login-component">
+      <h1>Sign Up</h1>
       <Container component="main" maxWidth="xs">
-      <TextField
+        <TextField
           label="Name"
           variant="outlined"
           margin="normal"
@@ -98,10 +96,14 @@ export default function SignIn() {
           value={password}
           onChange={handlePasswordChange}
         />
-        <Button variant="contained" color="primary" onClick={handleSignIn}>
-          Sign In
+        <Button
+          variant="contained"
+          color="primary"
+          style={{ backgroundColor: "#ec729c", marginTop: "25px" }}
+          onClick={handleSignIn}
+        >
+          Sign Up
         </Button>
-
       </Container>
       {/* {showAlert && (
         <Alert variant="filled" severity="error" onClose={handleCloseAlert}>
