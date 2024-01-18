@@ -26,7 +26,6 @@ function NoteComponent({ file }: NoteComponentProps) {
   const [isBoxVisible, setBoxVisibility] = React.useState(true);
 
   const handleClickEvent = async () => {
-    console.log(`aici ai dat click: ${file.FileContent}`);
     navigate(`/viewFile/${file.FileId}`);
   };
 

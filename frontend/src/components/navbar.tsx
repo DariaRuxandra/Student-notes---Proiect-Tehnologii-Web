@@ -102,7 +102,7 @@ function ResponsiveAppBar() {
           </Box>
 
           {/* Vreau ca pe path-ul '/' sa nu imi apara butoanele de Edit si My Work */}
-          {location.pathname !== '/' && (
+          {location.pathname !== '/' && location.pathname !== '/SignIn' &&  (
             <React.Fragment>
               <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
               <Typography

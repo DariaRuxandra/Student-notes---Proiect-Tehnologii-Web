@@ -28,8 +28,6 @@ async function getCoursesForUser(userId: number) {
     try {
       const url = `/user/${userId}/courses`;
       return(await api.get(url)).data; 
-    //   if (response && response.courses) {
-    //     return response.courses;
     } catch (error) {
       console.error('Error fetching courses:', error);
       throw error;

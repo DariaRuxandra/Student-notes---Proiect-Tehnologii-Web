@@ -10,6 +10,7 @@ import {
   SelectChangeEvent,
 } from "@mui/material";
 import "../css/MyWork.css";
+import { uniq } from "lodash";
 
 interface File {
   FileId: number;
@@ -24,40 +25,38 @@ export default function MyWork() {
   const [course, setCourse] = useState<string>("");
 
   useEffect(() => {
-    const fetchFiles = async () => {
+    const fetchData = async () => {
       try {
-        const response = await get("/edit");
-        setFiles(response.rows);
+        const filesResponse = await get("/edit");
+        setFiles(filesResponse.rows);
+
+        const storedId = localStorage.getItem("id");
+        const userId = storedId ? parseInt(storedId, 10) : 0;
+
+        const coursesResponse = await getCoursesForUser(userId);
+       const array = coursesResponse.courses.courses;
+       console.log(array)
+       let unique: any[] = [];
+       array.forEach((course: any) => {
+        if(!unique.includes(course)){
+          unique.push(course);
+        }
+       })
+        setCourses(unique)
       } catch (error) {
-        console.error("Error fetching files:", error);
+        console.error("Error fetching data:", error);
       }
     };
 
-    const fetchCourses = async () => {
-      const storedId = localStorage.getItem("id");
-      const userId = storedId ? parseInt(storedId, 10) : 0;
-
-      try {
-        const userCourses = await getCoursesForUser(userId);
-        setCourses(userCourses.courses.courses);
-      } catch (error) {
-        console.error("Error fetching courses:", error);
-      }
-    };
-
-    fetchFiles();
-    fetchCourses();
+    fetchData();
   }, []);
 
   const handleChange = (event: SelectChangeEvent) => {
     setCourse(event.target.value as string);
-    console.log(event.target.value);
   };
 
   return (
     <div className="my-work-container">
-      {/* <h1>My Work</h1> */}
-
       <FormControl fullWidth className="form">
         <InputLabel id="demo-simple-select-label">Courses</InputLabel>
         <Select
@@ -71,13 +70,11 @@ export default function MyWork() {
           <MenuItem value="" key="all">
             ALL
           </MenuItem>
-          {courses.length > 0
-            ? courses.map((courseOption, index) => (
-                <MenuItem key={index} value={courseOption}>
-                  {String(courseOption)}
-                </MenuItem>
-              ))
-            : null}
+          {courses.map((courseOption, index) => (
+            <MenuItem key={index} value={courseOption}>
+              {String(courseOption)}
+            </MenuItem>
+          ))}
         </Select>
       </FormControl>
 
@@ -85,7 +82,7 @@ export default function MyWork() {
         <div>
           {files.map(
             (file) =>
-              (course === "" || file.FileCourse === course) && (
+              (!course || file.FileCourse === course) && (
                 <NoteComponent key={file.FileId} file={file} />
               )
           )}
