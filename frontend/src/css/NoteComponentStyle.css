@@ -4,12 +4,22 @@
   justify-content: space-between !important;
   border-radius: 10px;
   align-items: center !important;
+  transition: all 0.1s !important;
+}
+
+.container:hover {
+  /* cursor: pointer !important; */
+  transform: scale(1.005) !important;
 }
 
 .buttonContainer {
   display: flex;
   gap: 10px;
   align-items: center !important;
+}
+
+.buttonContainer .custom-icon:hover {
+  fill: #ec729c;
 }
 
 .note-text-container {

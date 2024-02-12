@@ -8,10 +8,10 @@ userFileRouter.route('/userFile').post(async (req, res) => {
 });
 
 userFileRouter.route('/userFile/:id').get( async (req, res) => {
+    
     let id = parseInt(req.params.id) 
     return res.json(await getUserFileById(id));
 });
-
 
 userFileRouter.route('/userFile').get( async (req, res) => {
     return res.json(await getUserFiles());

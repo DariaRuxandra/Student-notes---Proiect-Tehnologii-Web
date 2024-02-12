@@ -93,7 +93,7 @@ export default function LogIn() {
         </p>
       </Container>
       {showAlert && (
-        <Alert variant="filled" severity="error" onClose={handleCloseAlert}>
+        <Alert className="custom-alert" variant="filled" severity="error" onClose={handleCloseAlert}>
           The credentials do not exist.
         </Alert>
       )}

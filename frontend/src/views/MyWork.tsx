@@ -12,6 +12,10 @@ import {
 import "../css/MyWork.css";
 import { uniq } from "lodash";
 
+interface Course {
+  FileCourse: string;
+}
+
 interface File {
   FileId: number;
   FileCourse: string;
@@ -21,9 +25,9 @@ interface File {
 
 export default function MyWork() {
   const [files, setFiles] = useState<File[]>([]);
-  const [courses, setCourses] = useState<string[]>([]);
+  const [courses, setCourses] = useState<Course[]>([]);
   const [course, setCourse] = useState<string>("");
-
+ 
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -32,24 +36,32 @@ export default function MyWork() {
 
         const storedId = localStorage.getItem("id");
         const userId = storedId ? parseInt(storedId, 10) : 0;
-
+  
         const coursesResponse = await getCoursesForUser(userId);
-       const array = coursesResponse.courses.courses;
-       console.log(array)
-       let unique: any[] = [];
-       array.forEach((course: any) => {
-        if(!unique.includes(course)){
-          unique.push(course);
+  
+        
+        if (!coursesResponse || !Array.isArray(coursesResponse.courses.courses)) {
+          console.error("Invalid courses data:", coursesResponse);
+          return;
         }
-       })
-        setCourses(unique)
+
+        const uniqueCourses = coursesResponse.courses.courses.filter((course: any, index: number, self: any[]) =>
+        index === self.findIndex((c: any) => c.FileCourse === course.FileCourse)
+      );
+
+        setCourses(uniqueCourses);
+        
+        setCourses(coursesResponse.courses.courses);
+
       } catch (error) {
         console.error("Error fetching data:", error);
       }
     };
-
+  
     fetchData();
   }, []);
+  
+  
 
   const handleChange = (event: SelectChangeEvent) => {
     setCourse(event.target.value as string);
@@ -70,26 +82,26 @@ export default function MyWork() {
           <MenuItem value="" key="all">
             ALL
           </MenuItem>
-          {courses.map((courseOption, index) => (
-            <MenuItem key={index} value={courseOption}>
-              {String(courseOption)}
+          {courses.map((course, index) => (
+            <MenuItem key={index} value={course.FileCourse}>
+              {course.FileCourse}
             </MenuItem>
           ))}
         </Select>
       </FormControl>
 
-      {files.length > 0 ? (
-        <div>
-          {files.map(
-            (file) =>
-              (!course || file.FileCourse === course) && (
-                <NoteComponent key={file.FileId} file={file} />
-              )
-          )}
-        </div>
-      ) : (
-        <p>No files available</p>
-      )}
+      {Array.isArray(courses) && courses.length > 0 ? (
+  <div>
+    {courses
+      .filter((file) => !course || file.FileCourse === course)
+      .map((file) => (
+        <NoteComponent file={file as any} />
+      ))}
+  </div>
+) : (
+  <p>No files available</p>
+)}
+
     </div>
   );
 }

@@ -67,13 +67,10 @@ function NoteComponent({ file }: NoteComponentProps) {
           </div>
 
           <div className="buttonContainer">
-            {/* <Button 
-          variant="contained" color="primary"
-          onClick={handleDeleteEvent}>
-            Delete
-          </Button> */}
+            
             <Tooltip title="Delete">
               <DeleteIcon
+              className="custom-icon"
                 sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                 fontSize="large"
                 onClick={handleDeleteEvent}
@@ -81,6 +78,7 @@ function NoteComponent({ file }: NoteComponentProps) {
             </Tooltip>
             <Tooltip title="Update">
               <UpdateIcon
+              className="custom-icon"
                 sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                 fontSize="large"
                 onClick={handleUpdateEvent}
@@ -88,27 +86,13 @@ function NoteComponent({ file }: NoteComponentProps) {
             </Tooltip>
             <Tooltip title="View">
               <RemoveRedEyeIcon
+              className="custom-icon"
                 sx={{ display: { xs: "none", md: "flex" }, mr: 1 }}
                 fontSize="large"
                 onClick={handleClickEvent}
               />
             </Tooltip>
-            {/* // butoane vechi */}
-            {/* 
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={handleUpdateEvent}
-            >
-              Update
-            </Button> */}
-            {/* <Button
-              variant="contained"
-              color="primary"
-              onClick={handleClickEvent}
-            >
-              View
-            </Button> */}
+            
           </div>
         </Box>
       )}

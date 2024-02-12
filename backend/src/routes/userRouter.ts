@@ -12,11 +12,12 @@ userRouter.route('/user/:id').get( async (req, res) => {
     return res.json(await getUserById(id));
 });
 
+
 userRouter.route('/user/:id/courses').get(async (req, res) => {
     try {
       const id = parseInt(req.params.id);
       const courses = await getUserCoursesById(id);
-  
+      console.log('courses:', courses);
       if (!courses) {
         return res.status(404).json({ error: 'User not found' });
       }

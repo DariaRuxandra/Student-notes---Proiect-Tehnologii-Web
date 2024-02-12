@@ -35,12 +35,6 @@ async function getCoursesForUser(userId: number) {
   }
 
 
-  
-  
-  
-  
-  
-
 //verifica doar daca exista mail-ul
 // async function getIdByEmail(url: string, email: string) {
 //     try {

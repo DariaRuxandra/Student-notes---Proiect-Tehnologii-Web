@@ -33,13 +33,13 @@ async function getUserByEmail(email: string) {
 }
 
 //m-a distrus, dar merge
-async function getUserCoursesById(userId: any) {
+async function  getUserCoursesById(userId: any) {
   try {
     const user = await User.findByPk(userId, {
       include: {
         model: File,
         as: 'Files',
-        attributes: ['FileCourse'],
+        attributes: ['FileId','FileCourse', 'FileTitle', 'FileContent'],
         through: { attributes: [] },
       },
     });
@@ -58,17 +58,28 @@ async function getUserCoursesById(userId: any) {
 
     const courses = userFiles.map((file: any) => file.FileCourse);
 
-    if (!courses.length) {
+    // if (!courses.length) {
+    //   console.log(`User ${userId} has no associated courses`);
+    //   return { error: 'User has no associated courses' };
+    // }
+
+    // return { courses };
+
+    if (!Array.isArray(userFiles) || userFiles.length === 0) {
       console.log(`User ${userId} has no associated courses`);
       return { error: 'User has no associated courses' };
     }
 
-    return { courses };
+    return { courses: userFiles }; // Return the entire array of file objects
+
   } catch (error) {
     console.error('Error fetching user courses:', error);
     return { error: 'Internal Server Error' };
   }
 }
+
+
+
 
 
 async function getUserForLogin(email: string, password: string) {

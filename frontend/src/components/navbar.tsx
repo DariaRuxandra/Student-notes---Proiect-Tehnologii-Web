@@ -37,7 +37,7 @@ function ResponsiveAppBar() {
   }
 
   function handleIconClick(){
-    navigate("/");
+    navigate("/MyWork");
   }
 
   return (
