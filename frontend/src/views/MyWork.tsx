@@ -25,8 +25,9 @@ interface File {
 
 export default function MyWork() {
   const [files, setFiles] = useState<File[]>([]);
-  const [courses, setCourses] = useState<Course[]>([]);
+  const [courses, setCourses] = useState<File[]>([]);
   const [course, setCourse] = useState<string>("");
+  const [courseForFilter, setCourseForFilter] = useState<File[]>([]);
  
   useEffect(() => {
     const fetchData = async () => {
@@ -49,8 +50,8 @@ export default function MyWork() {
         index === self.findIndex((c: any) => c.FileCourse === course.FileCourse)
       );
 
-        setCourses(uniqueCourses);
-        
+        setCourseForFilter(uniqueCourses);
+        console.log(uniqueCourses);        
         setCourses(coursesResponse.courses.courses);
 
       } catch (error) {
@@ -82,7 +83,7 @@ export default function MyWork() {
           <MenuItem value="" key="all">
             ALL
           </MenuItem>
-          {courses.map((course, index) => (
+          {courseForFilter.map((course, index) => (
             <MenuItem key={index} value={course.FileCourse}>
               {course.FileCourse}
             </MenuItem>
@@ -94,14 +95,13 @@ export default function MyWork() {
   <div>
     {courses
       .filter((file) => !course || file.FileCourse === course)
-      .map((file) => (
-        <NoteComponent file={file as any} />
+      .map((file, index) => (
+        <NoteComponent key = {index} file={file as any} />
       ))}
   </div>
-) : (
-  <p>No files available</p>
-)}
-
+  ) : (
+    <p>No files available</p>
+  )}
     </div>
   );
 }
